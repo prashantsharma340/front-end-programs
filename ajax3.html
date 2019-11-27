@@ -1,0 +1,92 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <script>
+        var i, x = "";
+        $(document).ready(function () {
+            $("button").click(function () {
+                $.ajax({
+                    method: "GET",
+                    crossDomain: true,
+                    url: "https://www.balldontlie.io/api/v1/players",
+                    dataType: "json",
+                    async: true,
+                    success: function (data) {
+                        x="<table class='abc'><tr><th>NO.  </th><th>NAME</th></tr>"
+                        for (i in data.data) {
+                            x +="<tr><td>" +data.data[i].team.id + "</td><td>"+
+                                data.data[i].last_name +
+                                data.data[i].first_name + " </td></tr>"
+                        }
+                        x+="</table>";
+                        $("#demo").append(x);
+                        document.getElementById("demo").innerHTML = x;
+                    },
+                    error: function () {
+                        infoContent = "<div>Sorry, data is not coming through. Refresh and try again.</div>";
+                    }
+
+
+                });
+            });
+        });
+    </script>
+    <style>
+        th,td{
+            text-align:center;
+            font-size: 20px;
+            color:white;  
+        }
+       
+        .but {
+            height: 100px;
+            width: 400px;
+            font-family: fantasy;
+            background-color: black;
+            color: white;
+            border: black;
+            margin-left: -2px;
+            font-size: 25px;
+        }
+
+        body {
+            background-image: url(nba.jpg);
+            height: 1000x;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            }
+
+        
+        #demo{
+            font-size: larger;
+    color: white;
+    font-family: cursive;
+    padding-left: 50px;
+    margin-top: 30px;
+}
+
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid" id="main">
+        <div class="row">
+            <div class="col-xs-12">
+                <button class="but">CLICK HERE TO KNOW ABOUT SOME NBA PLAYERS</button>
+            </div>
+        </div>
+        <div class="row" id="demo">
+            <div class="col-xs-12">
+              
+            </div>
+
+        </div>
+</body>
+
+</html>
